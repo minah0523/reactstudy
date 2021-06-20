@@ -3,7 +3,7 @@ import React from 'react';
 import "./App.css";
 import Header from './components/Header';
 import Footer from './components/Footer';
-import {Container} from 'react-bootstrap'
+import Main from './components/Main';
 
 // 라이브러리를 불러오는 곳
 // 글로벌 상수를 선언하는 곳
@@ -20,12 +20,8 @@ const App = () => {
     //   <Footer />
     // </div>
     <>
-      <Header />
-        <main className='py-3'>
-          <Container>
-            <h1>Welcome to Mina Shopping!</h1>
-          </Container>
-        </main>
+      <Header variant='primary' />
+      <Main />
       <Footer />
     </>
   );

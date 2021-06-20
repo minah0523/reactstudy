@@ -1,10 +1,10 @@
 import React from 'react';
 import {Navbar, Nav, Container} from 'react-bootstrap';
 
-const Header = () => {
-    return (
+const Header = ({variant}) => {
+    return ( 
         <header>
-            <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+            <Navbar bg={variant} variant='dark' expand='lg' collapseOnSelect>
                 <Container>
                     <Navbar.Brand href='/'>MinaShop</Navbar.Brand>
                     <Navbar.Toggle aria-controls='basic-navbar-nav' />
