@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col, Card} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 import products from '../products';
 import ProductCard from './ProductCard';
 
@@ -11,8 +11,9 @@ const Main = () => {
             <h1>Welcome to Mina Shopping!</h1>
             <Row>
                 {products.map(product => (
-                    <Col sm={12} md={6} lg={4} xl={3}>
+                    <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                         <ProductCard 
+                            id={product._id}
                             name={product.name}
                             price={product.price}
                             img={product.image}
