@@ -1,13 +1,11 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
+import ProductCard from '../components/ProductCard';
 import products from '../products';
-import ProductCard from './ProductCard';
 
-
-const Main = () => {
+const HomeScreen = () => {
     return (
-        <main className='py-3'>
-          <Container>
+        <Container>
             <h1>Welcome to Mina Shopping!</h1>
             <Row>
                 {products.map(product => (
@@ -27,10 +25,8 @@ const Main = () => {
             {/* {products.map(product => (
                 <h1>{product.name}</h1>
             ))} */}
-          </Container>
-        </main>
-
+        </Container>
     );
 };
 
-export default Main;
+export default HomeScreen;

@@ -1,9 +1,13 @@
 // 단축키 rsc
 import React from 'react';
 import "./App.css";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Container} from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Main from './components/Main';
+// import Main from './components/Main';
+import HomeScreen from './screens/HomeScreen';
+import DetailScreen from './screens/DetailScreen';
 
 // 라이브러리를 불러오는 곳
 // 글로벌 상수를 선언하는 곳
@@ -19,11 +23,15 @@ const App = () => {
     //   <h1>안녕하세용</h1>
     //   <Footer />
     // </div>
-    <>
+    
+    <Router>
       <Header variant='primary' />
-      <Main />
-      <Footer />
-    </>
+      <main className='py-3'>
+        <Route path='/' component={HomeScreen} exact />
+        <Route path='/product/:id' component={DetailScreen} />
+      </main>
+      <Footer /> 
+    </Router>
   );
 };
 
