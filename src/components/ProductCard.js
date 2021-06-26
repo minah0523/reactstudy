@@ -42,7 +42,7 @@ const ProductCard = ({id, img, name, desc, rating, numReviews, price}) => {
                     <Card.Text as='h4'>
                         ${price}
                     </Card.Text>
-                    <Link to='/product/2'>
+                    <Link to={`/product/${id}`}>
                         <Button theme={theme}>Button!</Button>
                     </Link>
                     <Button theme={theme} variant='ghost'>Button2!</Button>
