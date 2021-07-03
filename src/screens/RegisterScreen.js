@@ -3,32 +3,42 @@ import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
 import axios from 'axios';
+import LoadingBar from '../components/LoadingBar';
 
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ history }) => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [loading, setLoading] = useState(false);
+
     const submitHandler = async (e) => {
         e.preventDefault();
+
         const userInput = {
             name,
             email,
             password
         }
 
+        setLoading(true);
+
         await axios.post("/api/users", userInput)
-        .then(res => console.log(res.data))
+        .then(res =>{
+            setLoading(false); 
+            console.log(res.data);
+            history.push('/login')
+        })
         .catch(err => console.log(err.message))
 
     }
 
-
     return (
         <FormContainer>
             <h1>Register</h1>
+            {loading && <LoadingBar />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>

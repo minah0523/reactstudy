@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
 import axios from 'axios';
-
+import LoadingBar from '../components/LoadingBar';
 
 const LoginScreen = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const [loading, setLoading] = useState(false);
 
     const submitHandler = async (e) => {
         e.preventDefault()
@@ -18,14 +20,20 @@ const LoginScreen = () => {
             password
         }
 
+        setLoading(true);
+
         await axios.post("/api/users/login", userInput)
-        .then(res => console.log(res))
+        .then(res => {
+            setLoading(false)
+            console.log(res.data)
+        })
         .catch(err => console.log(err.message))
     }
 
     return (
         <FormContainer>
             <h1>Sign In</h1>
+            {loading && <LoadingBar />}
             <Form onSubmit={submitHandler}>
                <Form.Group controlId="email">
                     <Form.Label>Email Address</Form.Label>
