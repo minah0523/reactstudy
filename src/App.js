@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 // import Main from './components/Main';
 import HomeScreen from './screens/HomeScreen';
 import DetailScreen from './screens/DetailScreen';
+import LoginScreen from './screens/LoginScreen';
 
 // 라이브러리를 불러오는 곳
 // 글로벌 상수를 선언하는 곳
@@ -28,6 +29,7 @@ const App = () => {
       <main className='py-3'>
         <Route path='/' component={HomeScreen} exact />
         <Route path='/product/:id' component={DetailScreen} />
+        <Route path='/login/' component={LoginScreen} />
       </main>
       <Footer /> 
     </Router>
