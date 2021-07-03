@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
 import DetailScreen from './screens/DetailScreen';
 import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 // 라이브러리를 불러오는 곳
 // 글로벌 상수를 선언하는 곳
@@ -30,6 +31,7 @@ const App = () => {
         <Route path='/' component={HomeScreen} exact />
         <Route path='/product/:id' component={DetailScreen} />
         <Route path='/login/' component={LoginScreen} />
+        <Route path='/register/' component={RegisterScreen} />
       </main>
       <Footer /> 
     </Router>
