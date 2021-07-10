@@ -1,39 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
-import axios from 'axios';
 import LoadingBar from '../components/LoadingBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../actions/userActions'
+import Message from "../components/Message";
 
-const LoginScreen = () => {
+const LoginScreen = ({ location, history }) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const { loading, error, userInfo } = userLogin;
+
+    const redirect = location.search ? location.search.split('=')[1] : '/'
 
     const submitHandler = async (e) => {
         e.preventDefault()
-
-        const userInput = {
-            email,
-            password
-        }
-
-        setLoading(true);
-
-        await axios.post("/api/users/login", userInput)
-        .then(res => {
-            setLoading(false)
-            console.log(res.data)
-        })
-        .catch(err => console.log(err.message))
+        dispatch(login(email, password))
     }
+
+    useEffect(() => {
+        if(userInfo) {
+            history.push(redirect)
+        }
+    }, [history, userInfo, redirect])
+
 
     return (
         <FormContainer>
             <h1>Sign In</h1>
             {loading && <LoadingBar />}
+            {error && <Message variant='danger'>{error}</Message>}
+
             <Form onSubmit={submitHandler}>
                <Form.Group controlId="email">
                     <Form.Label>Email Address</Form.Label>
