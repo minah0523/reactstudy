@@ -4,6 +4,7 @@ import ProductCard from '../components/ProductCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import LoadingBar from "../components/LoadingBar";
+import Message from "../components/Message";
 
 const HomeScreen = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const HomeScreen = () => {
             {loading ? (
                 <LoadingBar />
             ) : error ? (
-                <h1>{error}</h1>
+                <Message variant='danger'>{error}</Message>
             ) : (
                 <Row>
                     {products.length === 0
