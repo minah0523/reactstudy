@@ -1,14 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import LoadingBar from '../components/LoadingBar';
 import FormContainer from '../components/FormContainer';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({history}) => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    const dispatch = useDispatch();
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const { loading, userInfo } = userLogin;
+
+    useEffect(() => {
+        if(!userInfo){
+            history.push('/login');
+        }
+        else {
+            setName(userInfo.name);
+            setEmail(userInfo.email);
+        }
+    }, [dispatch, history, userInfo]);
+
 
     const submitHandler = async (e) => {
         e.preventDefault()
@@ -19,6 +36,7 @@ const ProfileScreen = () => {
             <Row>
                 <Col md={9}>
                     <h2>User Profile</h2>
+                    {loading && <LoadingBar />}
                     <Form onSubmit={submitHandler}>
                         <Form.Group controlId='name'>
                             <Form.Label>User Name</Form.Label>
