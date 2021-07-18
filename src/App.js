@@ -13,6 +13,7 @@ import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import CartScreen from "./screens/CartScreen";
 
 // 라이브러리를 불러오는 곳
 // 글로벌 상수를 선언하는 곳
@@ -40,6 +41,7 @@ const App = () => {
         <Route path='/payment/' component={PaymentScreen} />
         <Route path='/placeorder/' component={PlaceOrderScreen} />
         <Route path='/profile/' component={ProfileScreen} />
+        <Route path='/cart/:id?' component={CartScreen} />
       </main>
       <Footer /> 
     </Router>
