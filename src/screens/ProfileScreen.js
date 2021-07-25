@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Table } from 'react-bootstrap';
 import LoadingBar from '../components/LoadingBar';
-import FormContainer from '../components/FormContainer';
 import {getUserDetails, updateUserProfile} from "../actions/userActions";
 import Message from "../components/Message";
 
@@ -52,9 +51,8 @@ const ProfileScreen = ({history}) => {
     }
 
     return (
-        <FormContainer md={12}>
             <Row>
-                <Col md={9}>
+                <Col md={3}>
                     <h2>User Profile</h2>
                     {loading && <LoadingBar />}
                     {message && <Message variant='danger'>{message}</Message> }
@@ -100,11 +98,25 @@ const ProfileScreen = ({history}) => {
                         <Button type="submit" variant="primary">Update</Button>
                     </Form>
                 </Col>
-            </Row>
-            <Col md={3}>
+                <Col md={9}>
                     <h2>My Orders</h2>
-            </Col>
-        </FormContainer>
+                    <Table striped bordered hover responsive className="table-sm">
+                        <thread>
+                            <tr>
+                                <th>ID</th>
+                                <th>DATE</th>
+                                <th>TOTAL</th>
+                                <th>PAID</th>
+                                <th>DELIVERED</th>
+                                <th></th>
+                            </tr>
+                        </thread>
+                        <tbody>
+
+                        </tbody>
+                    </Table>
+                </Col>
+            </Row>
     );
 };
 

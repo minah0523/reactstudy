@@ -13,8 +13,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Card} from 'react-bootstrap';
-import Rating from './Rating';
-import Button from './Button';
+import {
+    Rating,
+    Button
+} from "../components";
 import { ThemeProvider } from "styled-components";
 import theme from '../styles/theme';
 import { Link } from 'react-router-dom';

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import FormContainer from '../components/FormContainer';
 import { Form, Button } from 'react-bootstrap'
-import CheckoutSteps from '../components/CheckoutSteps';
+import {FormContainer, CheckoutSteps} from '../components';
 
 
 const ShippingScreen = () => {

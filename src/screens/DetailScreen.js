@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import {Row, Col, Image, ListGroup, Button, Container, Form} from 'react-bootstrap';
 import Rating from '../components/Rating';
-//1
 import { useDispatch, useSelector } from 'react-redux';
-//3
 import {listProductDetails} from '../actions/productActions';
 import LoadingBar from "../components/LoadingBar";
 import Message from "../components/Message";
 
 
-const DetailScreen = ({history}) => {
+const DetailScreen = () => {
     //2
     const dispatch = useDispatch();
 
-    const [qty, setQty] = useState(0);
+    const [qty, setQty] = useState(1);
 
     const { id } = useParams();
 
-    //4
+    const history = useHistory();
+
     const productDetails = useSelector((state) => state.productDetails);
     const { product, loading, error } = productDetails;
 
-    //5
     useEffect(() => {
         dispatch(listProductDetails(id))
     }, [dispatch, id]);

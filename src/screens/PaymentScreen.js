@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import FormContainer from '../components/FormContainer';
-import { Form, Button, Col } from 'react-bootstrap'
-import CheckoutSteps from '../components/CheckoutSteps';
+import { Form, Button, Col } from 'react-bootstrap';
+import {FormContainer, CheckoutSteps} from "../components";
 
 const PaymentScreen = () => {
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import CheckoutSteps from '../components/CheckoutSteps';
-import { Row, Col, Button, ListGroup, Image, Card } from 'react-bootstrap'
-import FormContainer from '../components/FormContainer';
+import { Row, Col, Button, ListGroup, Image, Card } from 'react-bootstrap';
+import {CheckoutSteps, FormContainer} from '../components';
 
 const PlaceOrderScreen = () => {
 

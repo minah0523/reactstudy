@@ -5,7 +5,7 @@ const Message = ({ variant, children }) => {
     const [show, setShow] = useState(true);
 
     return (
-        <Alert variant={variant} onClose={() => setShow(false)} dismissible>
+        <Alert variant={variant} show={show} onClose={() => setShow(false)} dismissible>
             {children}
         </Alert>
     );

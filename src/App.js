@@ -2,22 +2,22 @@
 import React from 'react';
 import "./App.css";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-// import Main from './components/Main';
-import HomeScreen from './screens/HomeScreen';
-import DetailScreen from './screens/DetailScreen';
-import LoginScreen from './screens/LoginScreen';
-import RegisterScreen from './screens/RegisterScreen';
-import ShippingScreen from './screens/ShippingScreen';
-import PaymentScreen from './screens/PaymentScreen';
-import PlaceOrderScreen from './screens/PlaceOrderScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import CartScreen from "./screens/CartScreen";
+import { Header, Footer } from "./components"
+import {
+    HomeScreen,
+    DetailScreen,
+    LoginScreen,
+    RegisterScreen,
+    ShippingScreen,
+    PaymentScreen,
+    PlaceOrderScreen,
+    ProfileScreen,
+    CartScreen,
+} from "./screens"
+import {Container} from "react-bootstrap";
 
 // 라이브러리를 불러오는 곳
 // 글로벌 상수를 선언하는 곳
-
 
 const App = () => {
 
@@ -33,17 +33,19 @@ const App = () => {
     <Router>
       <Header variant='primary' />
       <main className='py-3'>
-        <Route path='/' component={HomeScreen} exact />
-        <Route path='/product/:id' component={DetailScreen} />
-        <Route path='/login/' component={LoginScreen} />
-        <Route path='/register/' component={RegisterScreen} />
-        <Route path='/shipping/' component={ShippingScreen} />
-        <Route path='/payment/' component={PaymentScreen} />
-        <Route path='/placeorder/' component={PlaceOrderScreen} />
-        <Route path='/profile/' component={ProfileScreen} />
-        <Route path='/cart/:id?' component={CartScreen} />
+          <Container>
+            <Route path='/' component={HomeScreen} exact />
+            <Route path='/product/:id' component={DetailScreen} />
+            <Route path='/login/' component={LoginScreen} />
+            <Route path='/register/' component={RegisterScreen} />
+            <Route path='/shipping/' component={ShippingScreen} />
+            <Route path='/payment/' component={PaymentScreen} />
+            <Route path='/placeorder/' component={PlaceOrderScreen} />
+            <Route path='/profile/' component={ProfileScreen} />
+            <Route path='/cart/:id?' component={CartScreen} />
+          </Container>
       </main>
-      <Footer /> 
+      <Footer />
     </Router>
   );
 };
