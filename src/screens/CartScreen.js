@@ -1,20 +1,22 @@
 import React, {useEffect} from 'react';
-import {Link, useParams, useHistory} from 'react-router-dom'
+import {Link, useParams, useHistory, useLocation} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Card, Col, Form, Image, ListGroup, Row} from "react-bootstrap";
 import {addToCart, removeFromCart} from "../actions/cartActions";
 import { Message } from "../components"
 
 
-const CartScreen = ({location}) => {
+const CartScreen = () => {
     const {id} = useParams();
 
+    const location = useLocation();
     const history = useHistory();
     const dispatch = useDispatch();
 
     const cart = useSelector((state) => state.cart)
     const { cartItems } = cart;
-    const qty = location.search ? Number(location.search.split('=')[1]) : 1;
+    const qty = location.search ? Number(location.search.split('=')[1]) : 1
+        console.log('qty', qty);
 
     useEffect(() => {
         if(id) {
