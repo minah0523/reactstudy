@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import styled, { css, ThemeProvider } from "styled-components";
-import theme from "../styles/theme";
+import styled, {  ThemeProvider } from "styled-components";
 
 ///////////////////////// 버튼 사용 예제 /////////////////////////
 // ==== 기본 버튼 ==== //

@@ -1,8 +1,34 @@
 import React from 'react';
 import { Row, Col, Button, ListGroup, Image, Card } from 'react-bootstrap';
-import {CheckoutSteps, FormContainer} from '../components';
+import {CheckoutSteps, FormContainer, Message} from '../components';
+import { useDispatch, useSelector } from 'react-redux';
+import {Link} from "react-router-dom";
 
 const PlaceOrderScreen = () => {
+
+    const cart = useSelector((state) => state.cart );
+
+    const addDecimals = (num) => {
+        return (Math.round(num * 100) / 100).toFixed(2);
+    }
+
+    cart.itemsPrice = addDecimals(
+        cart.cartItems.reduce((acc, item) => acc + item.price * item.price, 0)
+    )
+
+    cart.shippingPrice = addDecimals(
+        cart.itemsPrice > 100 ? 0 : 100
+    )
+
+    cart.taxPrice = addDecimals(
+        Number((0.15 * cart.itemsPrice).toFixed(2))
+    )
+
+    cart.totalPrice = (
+        Number(cart.itemsPrice ) +
+        Number(cart.shippingPrice) +
+        Number(cart.taxPrice)
+    ).toFixed(2)
 
     const placeOrderHandler = (e) => {
         e.preventDefault()
@@ -17,18 +43,52 @@ const PlaceOrderScreen = () => {
                         <ListGroup.Item>
                             <h2>Shipping</h2>
                             <p>
-                                <strong>Address:</strong>
+                                <strong>Address:</strong>{' '}
+                                {cart.shippingAddress.address}, {cart.shippingAddress.city},{' '}
+                                {cart.shippingAddress.postal},{' '}
+                                {cart.shippingAddress.country}
                             </p>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <h2>Payment Method</h2>
                             <p>
-                                <strong>Method:</strong>
+                                <strong>Method:</strong>{' '}
+                                {cart.paymentMethod}
                             </p>
                         </ListGroup.Item>
-                        {/* <ListGroup.Item>
+                        <ListGroup.Item>
                             <h2>Order Items</h2>
-                        </ListGroup.Item> */}
+                            {cart.cartItems.length === 0
+                                ? (
+                                    <Message>Your cart is empty.</Message>
+                                ) : (
+                                    <ListGroup.Item variant={'flush'}>
+                                        {cart.cartItems.map((item, index) =>(
+                                            <ListGroup.Item key={index}>
+                                                <Row>
+                                                    <Col md={1}>
+                                                        <Image
+                                                            src={item.image}
+                                                            alt={item.name}
+                                                            fluid
+                                                            rounded
+                                                        />
+                                                    </Col>
+                                                    <Col>
+                                                        <Link to={`/product/${item.product}`}>
+                                                            {item.name}
+                                                        </Link>
+                                                    </Col>
+                                                    <Col md={4}>
+                                                        {item.qty} * ${item.price} = ${item.qty * item.price}
+                                                    </Col>
+                                                </Row>
+                                            </ListGroup.Item>
+                                        ))}
+                                    </ListGroup.Item>
+                                )
+                            }
+                        </ListGroup.Item>
                     </ListGroup>
                 </Col>
                 <Col md={4}>
@@ -40,25 +100,25 @@ const PlaceOrderScreen = () => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Items</Col>
-                                    <Col>$1234</Col>
+                                    <Col>${cart.itemsPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Shipping</Col>
-                                    <Col>$123</Col>
+                                    <Col>${cart.shippingPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col>$123</Col>
+                                    <Col>${cart.taxPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total</Col>
-                                    <Col>$123</Col>
+                                    <Col>${cart.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
