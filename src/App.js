@@ -13,6 +13,7 @@ import {
     PlaceOrderScreen,
     ProfileScreen,
     CartScreen,
+    OrderScreen
 } from "./screens"
 import {Container} from "react-bootstrap";
 
@@ -43,6 +44,7 @@ const App = () => {
             <Route path='/placeorder' component={PlaceOrderScreen} />
             <Route path='/profile' component={ProfileScreen} />
             <Route path='/cart/:id?' component={CartScreen} />
+            <Route path='/order/:id?' component={OrderScreen} />
           </Container>
       </main>
       <Footer />
