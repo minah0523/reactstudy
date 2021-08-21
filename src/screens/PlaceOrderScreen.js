@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Row, Col, Button, ListGroup, Image, Card } from 'react-bootstrap';
 import {CheckoutSteps, FormContainer, Message} from '../components';
 import { useDispatch, useSelector } from 'react-redux';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import {createOrder} from '../actions/orderActions'
+import {ORDER_CLEAR_RESET} from "../constants/orderConstants";
 
 const PlaceOrderScreen = () => {
+
+    const dispatch = useDispatch();
+
+    const history = useHistory();
 
     const cart = useSelector((state) => state.cart );
 
@@ -30,8 +36,45 @@ const PlaceOrderScreen = () => {
         Number(cart.taxPrice)
     ).toFixed(2)
 
+    const orderCreate = useSelector((state) => state.orderCreate);
+
+    const {order, success, error} = orderCreate;
+
+    console.log(cart.shippingAddress)
+
+    if(!cart.shippingAddress.address){
+        history.push('/shipping')
+    }else if(!cart.paymentMethod) {
+        history.push('/payment')
+    }
+
+    useEffect(() => {
+        if(success) {
+            history.push(`/order/${order._id}`);
+            // dispatch({
+            //     type: ORDER_CLEAR_RESET,
+            // });
+        }
+    }, [history, success]);
+
+
     const placeOrderHandler = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
+        const userInput = {
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice
+        }
+
+        dispatch(
+            createOrder(userInput)
+        );
+
     }
 
     return (
@@ -45,7 +88,7 @@ const PlaceOrderScreen = () => {
                             <p>
                                 <strong>Address:</strong>{' '}
                                 {cart.shippingAddress.address}, {cart.shippingAddress.city},{' '}
-                                {cart.shippingAddress.postal},{' '}
+                                {cart.shippingAddress.postalCode},{' '}
                                 {cart.shippingAddress.country}
                             </p>
                         </ListGroup.Item>
