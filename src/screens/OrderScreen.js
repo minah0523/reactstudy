@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {Message, LoadingBar} from '../components'
@@ -15,6 +15,12 @@ const OrderScreen = () => {
 
     const {order, loading, error} = orderDetails;
 
+    console.log(order);
+
+    useEffect(() => {
+        dispatch(getOrderDetails(id))
+    }, [dispatch, id]);
+
     return (
         <>
             {loading && <LoadingBar/>}
@@ -30,10 +36,10 @@ const OrderScreen = () => {
                                 <ListGroup.Item>
                                     <h2>Shipping</h2>
                                     <p>
-                                        <strong>Name: </strong> 김민아
+                                        <strong>Name: </strong> {order.user.name}
                                     </p>
                                     <p>
-                                        <strong>Email: </strong>
+                                        <strong>Email: </strong> {order.user.email}
                                     </p>
                                 </ListGroup.Item>
                             </ListGroup>

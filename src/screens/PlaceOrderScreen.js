@@ -4,7 +4,6 @@ import {CheckoutSteps, FormContainer, Message} from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useHistory} from "react-router-dom";
 import {createOrder} from '../actions/orderActions'
-import {ORDER_CLEAR_RESET} from "../constants/orderConstants";
 
 const PlaceOrderScreen = () => {
 
@@ -40,7 +39,10 @@ const PlaceOrderScreen = () => {
 
     const {order, success, error} = orderCreate;
 
+
     console.log(cart.shippingAddress)
+
+    console.log({order,cart});
 
     if(!cart.shippingAddress.address){
         history.push('/shipping')
@@ -51,9 +53,6 @@ const PlaceOrderScreen = () => {
     useEffect(() => {
         if(success) {
             history.push(`/order/${order._id}`);
-            // dispatch({
-            //     type: ORDER_CLEAR_RESET,
-            // });
         }
     }, [history, success]);
 
