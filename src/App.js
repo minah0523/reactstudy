@@ -19,6 +19,7 @@ import {
     OrderListScreen
 } from "./screens"
 import {Container} from "react-bootstrap";
+import UserEditScreen from "./screens/UserEditScreen";
 
 // 라이브러리를 불러오는 곳
 // 글로벌 상수를 선언하는 곳
@@ -51,6 +52,7 @@ const App = () => {
             <Route path='/admin/userlist' component={UserListScreen} />
             <Route path='/admin/productlist' component={ProductListScreen} />
             <Route path='/admin/orderlist' component={OrderListScreen} />
+            <Route path='/admin/user/:id/edit' component={UserEditScreen} />
           </Container>
       </main>
       <Footer />
